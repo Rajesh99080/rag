@@ -1,0 +1,20 @@
+EKS1.23 Setup
+Create Instance (EKS Master/Server)
+    9  yum update -y
+   10  curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.13/2022-10-31/bin/linux/amd64/kubectl
+   11  curl -o kubectl.sha256 https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.13/2022-10-31/bin/linux/amd64/kubectl.sha256
+   12  openssl sha1 -sha256 kubectl
+   13  chmod +x ./kubectl
+   14  mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+   15  echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+   16  kubectl version --short --client
+
+
+
+#aws eks --region us-east-1 update-kubeconfig --name testcluster
+#kubectl get svc
+#kubectl get nodes
+kubectl apply -f hwdeployment.yml
+kubectl apply -f hwservice.yml
+kubectl get deployment
+#kubectl get svc
